@@ -336,6 +336,10 @@
     display: flex;
   }
 
+  .table {
+    display: table;
+  }
+
   .items-center {
     align-items: center;
   }

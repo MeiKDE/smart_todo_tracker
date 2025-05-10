@@ -1,15 +1,12 @@
-interface Post {
-  id: string;
-  title: string;
-  content: string;
-  createdAt?: Date;
-  updatedAt?: Date;
-  authorId?: string;
-}
+import { Todo } from "@/types";
 
-export const postApi = {
-  create: async (data: Pick<Post, "title" | "content">) => {
-    const response = await fetch("/api/posts", {
+type CreateTodoInput = {
+  text: string;
+};
+
+export const todoApi = {
+  create: async (data: CreateTodoInput) => {
+    const response = await fetch("/api/todos", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data),
@@ -18,12 +15,12 @@ export const postApi = {
   },
 
   getAll: async () => {
-    const response = await fetch("/api/posts");
+    const response = await fetch("/api/todos");
     return response.json();
   },
 
-  update: async (id: string, data: Partial<Post>) => {
-    const response = await fetch(`/api/posts/${id}`, {
+  update: async (id: number, data: Partial<Todo>) => {
+    const response = await fetch(`/api/todos/${id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data),
@@ -31,8 +28,8 @@ export const postApi = {
     return response.json();
   },
 
-  delete: async (id: string) => {
-    const response = await fetch(`/api/posts/${id}`, {
+  delete: async (id: number) => {
+    const response = await fetch(`/api/todos/${id}`, {
       method: "DELETE",
     });
     return response.json();
