@@ -38,7 +38,7 @@ export default function TodoItem({
           ? "bg-green-100 hover:bg-green-200"
           : "bg-gray-100 hover:bg-gray-200"
       }`}
-      onClick={() => onSelectTodo(todo.id)}
+      onClick={() => onSelectTodo(todo.id.toString())}
     >
       <div>
         {isEditing ? (

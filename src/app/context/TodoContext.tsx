@@ -5,6 +5,7 @@ type Todo = {
   id: string;
   text: string;
   completed: boolean;
+  selected: boolean;
 };
 
 type TodoContextType = {
@@ -32,6 +33,7 @@ export function TodoProvider({ children }: { children: React.ReactNode }) {
           id: Date.now().toString(),
           text: input.trim(),
           completed: false,
+          selected: false,
         },
       ]);
       setInput("");
@@ -43,7 +45,14 @@ export function TodoProvider({ children }: { children: React.ReactNode }) {
   };
 
   const selectedTodo = (id: string) => {
-    const numericId = parseInt(id, 10);
+    setTodos(
+      todos.map((todo) =>
+        todo.id === id
+          ? { ...todo, selected: !todo.selected }
+          : { ...todo, selected: false }
+      )
+    );
+
     const todo = todos.find((todo) => todo.id === id);
     if (todo) {
       setInput(todo.text);

@@ -33,7 +33,8 @@ function TodoProvider({ children }) {
                 {
                     id: Date.now().toString(),
                     text: input.trim(),
-                    completed: false
+                    completed: false,
+                    selected: false
                 }
             ]);
             setInput("");
@@ -43,7 +44,13 @@ function TodoProvider({ children }) {
         setTodos(todos.filter((todo)=>todo.id !== id));
     };
     const selectedTodo = (id)=>{
-        const numericId = parseInt(id, 10);
+        setTodos(todos.map((todo)=>todo.id === id ? {
+                ...todo,
+                selected: !todo.selected
+            } : {
+                ...todo,
+                selected: false
+            }));
         const todo = todos.find((todo)=>todo.id === id);
         if (todo) {
             setInput(todo.text);
@@ -76,7 +83,7 @@ function TodoProvider({ children }) {
         children: children
     }, void 0, false, {
         fileName: "[project]/src/app/context/TodoContext.tsx",
-        lineNumber: 78,
+        lineNumber: 87,
         columnNumber: 10
     }, this);
 }
