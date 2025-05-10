@@ -3,10 +3,10 @@ import { Todo } from "@/types/index";
 
 interface TodoItemProps {
   todo: Todo;
-  onSelectTodo: (id: number) => void;
-  onDeleteTodo: (id: number) => void;
-  onCompleteTodo: (id: number) => void;
-  onEditTodo: (id: number, newText: string) => void;
+  onSelectTodo: (id: string) => void;
+  onDeleteTodo: (id: string) => void;
+  onCompleteTodo: (id: string) => void;
+  onEditTodo: (id: string, newText: string) => void;
 }
 
 export default function TodoItem({

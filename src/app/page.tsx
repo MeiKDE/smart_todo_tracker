@@ -3,7 +3,7 @@ import React from "react";
 import TodoItem from "@/components/TodoItem";
 import { useTodoContext } from "@/app/context/TodoContext";
 
-export default function App() {
+export default function Home() {
   const {
     input,
     setInput,

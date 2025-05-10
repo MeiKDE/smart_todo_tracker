@@ -144,85 +144,10 @@ function TodoItem({ todo, onSelectTodo, onDeleteTodo, onCompleteTodo, onEditTodo
     }, this);
 }
 }}),
-"[project]/src/app/context/TodoContext.tsx [app-ssr] (ecmascript)": ((__turbopack_context__) => {
-"use strict";
+"[project]/src/app/context/TodoContext.tsx [app-ssr] (ecmascript)": (function(__turbopack_context__) {
 
-var { g: global, __dirname } = __turbopack_context__;
+var { g: global, __dirname, m: module, e: exports } = __turbopack_context__;
 {
-__turbopack_context__.s({
-    "TodoProvider": (()=>TodoProvider),
-    "useTodoContext": (()=>useTodoContext)
-});
-var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/server/route-modules/app-page/vendored/ssr/react-jsx-dev-runtime.js [app-ssr] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/server/route-modules/app-page/vendored/ssr/react.js [app-ssr] (ecmascript)");
-"use client";
-;
-;
-const TodoContext = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["createContext"])(undefined);
-const TodoProvider = ({ children })=>{
-    const [input, setInput] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])("");
-    const [todos, setTodos] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])([]);
-    const addTodo = ()=>{
-        const newTodo = {
-            id: Date.now(),
-            text: input,
-            selected: false,
-            completed: false
-        };
-        setTodos((prev)=>[
-                ...prev,
-                newTodo
-            ]);
-        setInput("");
-    };
-    const deleteTodo = (id)=>{
-        setTodos(todos.filter((todo)=>todo.id !== id));
-    };
-    // update selected boolean field
-    const selectedTodo = (id)=>{
-        setTodos(todos.map((todo)=>todo.id === id ? {
-                ...todo,
-                selected: !todo.selected
-            } : todo));
-    };
-    // update selected boolean field
-    const completedTodo = (id)=>{
-        setTodos(todos.map((todo)=>todo.id === id ? {
-                ...todo,
-                completed: !todo.completed
-            } : todo));
-    };
-    const editTodo = (id, newText)=>{
-        setTodos(todos.map((todo)=>todo.id === id ? {
-                ...todo,
-                text: newText
-            } : todo));
-    };
-    return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(TodoContext.Provider, {
-        value: {
-            input,
-            todos,
-            setInput,
-            addTodo,
-            deleteTodo,
-            selectedTodo,
-            completedTodo,
-            editTodo
-        },
-        children: children
-    }, void 0, false, {
-        fileName: "[project]/src/app/context/TodoContext.tsx",
-        lineNumber: 80,
-        columnNumber: 5
-    }, this);
-};
-const useTodoContext = ()=>{
-    const context = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useContext"])(TodoContext);
-    if (!context) {
-        throw new Error("useTodoContext must be used within a TodoProvider");
-    }
-    return context;
-};
 }}),
 "[project]/src/app/page.tsx [app-ssr] (ecmascript)": ((__turbopack_context__) => {
 "use strict";
@@ -230,7 +155,7 @@ const useTodoContext = ()=>{
 var { g: global, __dirname } = __turbopack_context__;
 {
 __turbopack_context__.s({
-    "default": (()=>App)
+    "default": (()=>Home)
 });
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/server/route-modules/app-page/vendored/ssr/react-jsx-dev-runtime.js [app-ssr] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$TodoItem$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/components/TodoItem.tsx [app-ssr] (ecmascript)");
@@ -239,7 +164,7 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$context$2f$Tod
 ;
 ;
 ;
-function App() {
+function Home() {
     const { input, setInput, todos, addTodo, deleteTodo, selectedTodo, completedTodo, editTodo } = (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$context$2f$TodoContext$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useTodoContext"])();
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Fragment"], {
         children: [

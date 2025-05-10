@@ -23,33 +23,32 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist
 ;
 ;
 const TodoContext = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["createContext"])(undefined);
-const TodoProvider = ({ children })=>{
+function TodoProvider({ children }) {
     const [input, setInput] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])("");
     const [todos, setTodos] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])([]);
     const addTodo = ()=>{
-        const newTodo = {
-            id: Date.now(),
-            text: input,
-            selected: false,
-            completed: false
-        };
-        setTodos((prev)=>[
-                ...prev,
-                newTodo
+        if (input.trim()) {
+            setTodos([
+                ...todos,
+                {
+                    id: Date.now().toString(),
+                    text: input.trim(),
+                    completed: false
+                }
             ]);
-        setInput("");
+            setInput("");
+        }
     };
     const deleteTodo = (id)=>{
         setTodos(todos.filter((todo)=>todo.id !== id));
     };
-    // update selected boolean field
     const selectedTodo = (id)=>{
-        setTodos(todos.map((todo)=>todo.id === id ? {
-                ...todo,
-                selected: !todo.selected
-            } : todo));
+        const numericId = parseInt(id, 10);
+        const todo = todos.find((todo)=>todo.id === id);
+        if (todo) {
+            setInput(todo.text);
+        }
     };
-    // update selected boolean field
     const completedTodo = (id)=>{
         setTodos(todos.map((todo)=>todo.id === id ? {
                 ...todo,
@@ -62,31 +61,32 @@ const TodoProvider = ({ children })=>{
                 text: newText
             } : todo));
     };
+    const value = {
+        input,
+        setInput,
+        todos,
+        addTodo,
+        deleteTodo,
+        selectedTodo,
+        completedTodo,
+        editTodo
+    };
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(TodoContext.Provider, {
-        value: {
-            input,
-            todos,
-            setInput,
-            addTodo,
-            deleteTodo,
-            selectedTodo,
-            completedTodo,
-            editTodo
-        },
+        value: value,
         children: children
     }, void 0, false, {
         fileName: "[project]/src/app/context/TodoContext.tsx",
-        lineNumber: 80,
-        columnNumber: 5
+        lineNumber: 78,
+        columnNumber: 10
     }, this);
-};
-const useTodoContext = ()=>{
+}
+function useTodoContext() {
     const context = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useContext"])(TodoContext);
     if (!context) {
         throw new Error("useTodoContext must be used within a TodoProvider");
     }
     return context;
-};
+}
 }}),
 "[project]/node_modules/next/dist/server/route-modules/app-page/module.compiled.js [app-ssr] (ecmascript)": (function(__turbopack_context__) {
 

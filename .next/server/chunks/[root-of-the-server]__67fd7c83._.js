@@ -63,9 +63,14 @@ __turbopack_context__.s({
 });
 var __TURBOPACK__imported__module__$5b$externals$5d2f40$prisma$2f$client__$5b$external$5d$__$2840$prisma$2f$client$2c$__cjs$29$__ = __turbopack_context__.i("[externals]/@prisma/client [external] (@prisma/client, cjs)");
 ;
-const globalForPrisma = globalThis;
-const prisma = globalForPrisma.prisma ?? new __TURBOPACK__imported__module__$5b$externals$5d2f40$prisma$2f$client__$5b$external$5d$__$2840$prisma$2f$client$2c$__cjs$29$__["PrismaClient"]();
-if ("TURBOPACK compile-time truthy", 1) globalForPrisma.prisma = prisma;
+const prismaClientSingleton = ()=>{
+    return new __TURBOPACK__imported__module__$5b$externals$5d2f40$prisma$2f$client__$5b$external$5d$__$2840$prisma$2f$client$2c$__cjs$29$__["PrismaClient"]();
+};
+const prisma = globalThis.prisma ?? prismaClientSingleton();
+if ("TURBOPACK compile-time truthy", 1) {
+    globalThis.prisma = prisma;
+}
+;
 }}),
 "[externals]/util [external] (util, cjs)": (function(__turbopack_context__) {
 

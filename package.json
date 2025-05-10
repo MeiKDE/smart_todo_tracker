@@ -6,7 +6,8 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "studio": "npx prisma studio --browser none --port 5560"
   },
   "dependencies": {
     "@next-auth/prisma-adapter": "^1.0.7",

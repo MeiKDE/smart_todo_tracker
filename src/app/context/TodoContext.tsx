@@ -1,104 +1,87 @@
 "use client";
 import React, { createContext, useContext, useState } from "react";
-import { Todo } from "@/types/index";
 
-interface TodoContextType {
+type Todo = {
+  id: string;
+  text: string;
+  completed: boolean;
+};
+
+type TodoContextType = {
   input: string;
-  todos: Todo[];
   setInput: (input: string) => void;
+  todos: Todo[];
   addTodo: () => void;
-  deleteTodo: (id: number) => void;
-  selectedTodo: (id: number) => void;
-  completedTodo: (id: number) => void;
-  editTodo: (id: number, newText: string) => void;
-}
+  deleteTodo: (id: string) => void;
+  selectedTodo: (id: string) => void;
+  completedTodo: (id: string) => void;
+  editTodo: (id: string, newText: string) => void;
+};
 
 const TodoContext = createContext<TodoContextType | undefined>(undefined);
 
-export const TodoProvider = ({ children }: { children: React.ReactNode }) => {
+export function TodoProvider({ children }: { children: React.ReactNode }) {
   const [input, setInput] = useState("");
   const [todos, setTodos] = useState<Todo[]>([]);
 
   const addTodo = () => {
-    const newTodo: Todo = {
-      id: Date.now(),
-      text: input,
-      selected: false,
-      completed: false,
-    };
-
-    setTodos((prev) => [...prev, newTodo]);
-    setInput("");
+    if (input.trim()) {
+      setTodos([
+        ...todos,
+        {
+          id: Date.now().toString(),
+          text: input.trim(),
+          completed: false,
+        },
+      ]);
+      setInput("");
+    }
   };
 
-  const deleteTodo = (id: number) => {
+  const deleteTodo = (id: string) => {
     setTodos(todos.filter((todo) => todo.id !== id));
   };
 
-  // update selected boolean field
-  const selectedTodo = (id: number) => {
+  const selectedTodo = (id: string) => {
+    const numericId = parseInt(id, 10);
+    const todo = todos.find((todo) => todo.id === id);
+    if (todo) {
+      setInput(todo.text);
+    }
+  };
+
+  const completedTodo = (id: string) => {
     setTodos(
       todos.map((todo) =>
-        todo.id === id
-          ? {
-              ...todo,
-              selected: !todo.selected,
-            }
-          : todo
+        todo.id === id ? { ...todo, completed: !todo.completed } : todo
       )
     );
   };
 
-  // update selected boolean field
-  const completedTodo = (id: number) => {
+  const editTodo = (id: string, newText: string) => {
     setTodos(
-      todos.map((todo) =>
-        todo.id === id
-          ? {
-              ...todo,
-              completed: !todo.completed,
-            }
-          : todo
-      )
+      todos.map((todo) => (todo.id === id ? { ...todo, text: newText } : todo))
     );
   };
 
-  const editTodo = (id: number, newText: string) => {
-    setTodos(
-      todos.map((todo) =>
-        todo.id === id
-          ? {
-              ...todo,
-              text: newText,
-            }
-          : todo
-      )
-    );
+  const value = {
+    input,
+    setInput,
+    todos,
+    addTodo,
+    deleteTodo,
+    selectedTodo,
+    completedTodo,
+    editTodo,
   };
 
-  return (
-    <TodoContext.Provider
-      value={{
-        input,
-        todos,
-        setInput,
-        addTodo,
-        deleteTodo,
-        selectedTodo,
-        completedTodo,
-        editTodo,
-      }}
-    >
-      {children}
-    </TodoContext.Provider>
-  );
-};
+  return <TodoContext.Provider value={value}>{children}</TodoContext.Provider>;
+}
 
-export const useTodoContext = () => {
+export function useTodoContext() {
   const context = useContext(TodoContext);
   if (!context) {
     throw new Error("useTodoContext must be used within a TodoProvider");
   }
-
   return context;
-};
+}
