@@ -1,11 +1,12 @@
 import { getServerSession } from "next-auth";
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { successResponse, errorResponse } from "@/utils/api-helpers";
 import { handlePrismaError } from "@/utils/error-handler";
 
 // CREATE
 export async function POST(req: Request) {
+  console.log("test POST");
   try {
     const session = await getServerSession(authOptions);
     if (!session) {
@@ -33,6 +34,7 @@ export async function POST(req: Request) {
 
 // READ (Get all posts)
 export async function GET() {
+  console.log("test GET");
   try {
     const posts = await prisma.post.findMany({
       include: {

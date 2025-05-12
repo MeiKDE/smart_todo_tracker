@@ -52,3 +52,31 @@ npx prisma studio
 ## update your Prisma client.
 
 run npx prisma generate
+
+## note to self
+
+# verify the database and user exist
+
+psql -U mei -p 5433 -d todo
+
+# Create user if it doesn't exist
+
+CREATE USER mei WITH PASSWORD 'mei';
+
+# Create database if it doesn't exist
+
+CREATE DATABASE todo;
+
+# Grant privileges
+
+GRANT ALL PRIVILEGES ON DATABASE todo TO mei;
+
+# Use Prisma CLI to test the connection:
+
+# Test the database connection
+
+npx prisma db pull
+
+# Check current state of the database
+
+npx prisma studio

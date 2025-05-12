@@ -1,5 +1,5 @@
 import { getServerSession } from "next-auth";
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { successResponse, errorResponse } from "@/utils/api-helpers";
 import { handlePrismaError } from "@/utils/error-handler";
@@ -10,6 +10,7 @@ export async function PUT(
   { params }: { params: { id: string } }
 ) {
   try {
+    console.log("Test PUT");
     const session = await getServerSession(authOptions);
     if (!session) {
       return errorResponse("Unauthorized");
@@ -33,6 +34,7 @@ export async function DELETE(
   { params }: { params: { id: string } }
 ) {
   try {
+    console.log("Test DELETE");
     const session = await getServerSession(authOptions);
     if (!session) {
       return errorResponse("Unauthorized");

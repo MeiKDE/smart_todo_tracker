@@ -1,5 +1,5 @@
 import { getServerSession } from "next-auth";
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { successResponse, errorResponse } from "@/utils/api-helpers";
 import { handlePrismaError } from "@/utils/error-handler";
@@ -15,16 +15,15 @@ export async function PUT(
       return errorResponse("Unauthorized");
     }
 
-    const { text, completed, selected } = await req.json();
+    const { text, completed } = await req.json();
     const todo = await prisma.todo.update({
       where: {
-        id: parseInt(params.id),
+        id: params.id,
         userId: session.user.id,
       },
       data: {
-        text,
-        completed,
-        selected,
+        ...(text !== undefined && { text }),
+        ...(completed !== undefined && { completed }),
       },
     });
 
@@ -47,7 +46,7 @@ export async function DELETE(
 
     await prisma.todo.delete({
       where: {
-        id: parseInt(params.id),
+        id: params.id,
         userId: session.user.id,
       },
     });

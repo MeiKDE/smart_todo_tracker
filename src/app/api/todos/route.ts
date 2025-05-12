@@ -1,10 +1,9 @@
 import { prisma } from "@/lib/prisma";
-import { successResponse, errorResponse } from "@/lib/api-helpers";
-import { handlePrismaError } from "@/lib/error-handler";
+import { successResponse, errorResponse } from "@/utils/api-helpers";
+import { handlePrismaError } from "@/utils/error-handler";
 
 // CREATE
 export async function POST(req: Request) {
-  console.log("CREATE- POST");
   try {
     const { text } = await req.json();
     if (!text) {
@@ -12,7 +11,11 @@ export async function POST(req: Request) {
     }
 
     const todo = await prisma.todo.create({
-      data: { text },
+      data: {
+        text,
+        completed: false,
+        selected: false,
+      },
     });
 
     return successResponse(todo);
@@ -23,11 +26,10 @@ export async function POST(req: Request) {
 
 // GET
 export async function GET() {
-  console.log("GET");
   try {
     const todos = await prisma.todo.findMany({
       orderBy: {
-        id: "asc",
+        id: "desc",
       },
     });
 
@@ -39,7 +41,6 @@ export async function GET() {
 
 // UPDATE
 export async function PUT(req: Request) {
-  console.log("UPDATE- PUT");
   try {
     const { id, text, completed, selected } = await req.json();
 
@@ -60,7 +61,6 @@ export async function PUT(req: Request) {
 
 // DELETE
 export async function DELETE(req: Request) {
-  console.log("DELETE");
   try {
     const { id } = await req.json();
 
